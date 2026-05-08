@@ -1,0 +1,300 @@
+/* 1. 디자인 컨셉: 다크모드 및 포인트 컬러 설정 */
+:root {
+	--bg-color: #0a0e14; /* 딥 네이비/블랙 */
+	--card-bg: #161b22;
+	--text-color: #e6edf3;
+	--point-green: #39ff14; /* 형광 그린 */
+	--point-blue: #00d4ff; /* 블루 */
+	--nav-bg: rgba(10, 14, 20, 0.8);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+	font-family:
+		'Pretendard',
+		-apple-system,
+		sans-serif;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	line-height: 1.6;
+}
+
+/* 2. 구조(Navigation): 상단 고정 바 */
+nav {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: rgba(10, 14, 20, 0.4);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	z-index: 1000;
+	border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.nav-container {
+	max-width: 1000px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 2rem;
+	align-items: center;
+}
+.logo {
+	font-weight: bold;
+	color: var(--point-green);
+	font-size: 1.2rem;
+}
+.nav-menu a {
+	color: var(--text-color);
+	text-decoration: none;
+	margin-left: 1.5rem;
+	font-size: 0.9rem;
+	transition: color 0.3s;
+}
+.nav-menu a:hover {
+	color: var(--point-blue);
+}
+
+/* 섹션 공통 스타일 */
+section {
+	padding: 100px 2rem;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+h2 {
+	font-size: 2rem;
+	margin-bottom: 3rem;
+	text-align: center;
+	color: var(--point-blue);
+}
+.highlight {
+	color: var(--point-green);
+}
+
+/* 메뉴 1: 미래 유망 직무 (Card Layout) */
+.job-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+.job-card {
+	background: rgba(22, 27, 34, 0.5);
+	padding: 2rem;
+	border-radius: 15px;
+	border: 1px solid rgba(48, 54, 61, 0.6);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	transition: transform 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.job-card:hover {
+	transform: translateY(-10px);
+	border-color: var(--point-green);
+	backdrop-filter: blur(25px) saturate(200%);
+	-webkit-backdrop-filter: blur(25px) saturate(200%);
+	box-shadow: 0 12px 48px rgba(57, 255, 20, 0.15);
+}
+.job-card h3 {
+	margin-bottom: 1rem;
+	color: var(--point-green);
+}
+
+/* 메뉴 2: 핵심 필수 역량 (Badge/List Layout) */
+.skill-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+.skill-item {
+	background: rgba(0, 212, 255, 0.08);
+	padding: 1.5rem;
+	border-left: 4px solid var(--point-blue);
+	border-radius: 0 10px 10px 0;
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border: 1px solid rgba(0, 212, 255, 0.2);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+	transition: backdrop-filter 0.3s, box-shadow 0.3s;
+}
+
+.skill-item:hover {
+	backdrop-filter: blur(25px) saturate(200%);
+	-webkit-backdrop-filter: blur(25px) saturate(200%);
+	box-shadow: 0 12px 48px rgba(0, 212, 255, 0.1);
+}
+
+/* 메뉴 3: 나의 4년 로드맵 (Vertical Timeline) */
+.timeline {
+	position: relative;
+	max-width: 800px;
+	margin: 0 auto;
+}
+.timeline::after {
+	content: '';
+	position: absolute;
+	width: 2px;
+	background: var(--point-green);
+	top: 0;
+	bottom: 0;
+	left: 20px;
+	opacity: 0.3;
+}
+
+.progress-bar {
+	position: absolute;
+	width: 2px;
+	background: linear-gradient(
+		to bottom,
+		var(--point-green),
+		var(--point-blue)
+	);
+	top: 0;
+	left: 20px;
+	height: 0%;
+	z-index: 2;
+	box-shadow: 0 0 15px var(--point-green),
+		0 0 25px rgba(57, 255, 20, 0.5);
+	transition: height 0.1s ease-out;
+}
+
+.timeline-item {
+	padding: 20px 40px;
+	position: relative;
+	background: transparent;
+}
+.timeline-item::before {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	background: var(--point-green);
+	border-radius: 50%;
+	left: 13px;
+	top: 25px;
+	z-index: 1;
+	box-shadow: 0 0 10px var(--point-green);
+}
+.year-label {
+	font-weight: bold;
+	color: var(--point-green);
+	font-size: 1.2rem;
+	margin-bottom: 0.5rem;
+	display: block;
+}
+
+/* Animate On Scroll */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fadeInRight {
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Set initial state - elements start off-screen */
+h2,
+.job-card,
+.skill-item,
+.timeline-item {
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.skill-item:nth-child(odd) {
+	transform: translateX(-30px);
+}
+
+.skill-item:nth-child(even) {
+	transform: translateX(30px);
+}
+
+.fade-in-up {
+	animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.fade-in-left {
+	animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.fade-in-right {
+	animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.scale-in {
+	animation: scaleIn 0.6s ease-out forwards;
+}
+
+.stagger-1 {
+	animation-delay: 0.1s;
+}
+
+.stagger-2 {
+	animation-delay: 0.2s;
+}
+
+.stagger-3 {
+	animation-delay: 0.3s;
+}
+
+.stagger-4 {
+	animation-delay: 0.4s;
+}
+
+/* Responsive Web */
+@media (max-width: 768px) {
+	.nav-menu {
+		display: none;
+	}
+	section {
+		padding: 60px 1.5rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+	.job-grid {
+		grid-template-columns: 1fr;
+	}
+}
